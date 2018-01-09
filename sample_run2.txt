@@ -1,0 +1,163 @@
+To Compile traverse to \543-p3_DPB\src directory and run the following command:
+
+javac \ase\vcs\*.java (If not already done for this project)
+
+=============================CREATE REPO COMMAND==============================================================
+Project Tree:
+
+mypt2\
+	hx.txt 	   // Contains "H".
+    stuff\	   // A sub-folder
+    	hello.txt  // Contains one line: “Hello world”.
+	goodbye.txt // Contains two lines: “Good” and then “bye”.
+
+Project repo tree:
+1. Command: java ase.vcs.VCSMain create <srcPath>\mypt2 <destPath>\mypt2repo
+
+Project Tree after create command:
+
+myptrepo\
+   Activity\
+      Manifest_11-26-2017_19.51.38_Hrs.txt
+   hx.txt\
+      72.1.txt
+   stuff\
+      hello.txt\
+      	8562.11.txt
+      goodbye.txt\
+	4764.9.txt
+   
+================================CHECK OUT #1 COMMAND============================================================
+
+2. command: java ase.vcs.VCSMain checkout <srcPath>\mypt2repo <destPath>\mypt2r_co1
+
+Project Tree after checkout #1 command:
+
+mypt2r_co1\
+   Activity\
+      Manifest_11-26-2017_19.53.29_Hrs.txt
+    hx.txt
+    stuff\
+      hello.txt
+      goodbye.txt
+	
+
+Project repo tree after checkout #1 command:
+
+myptrepo\
+   Activity\
+      Manifest_11-26-2017_19.53.38_Hrs.txt
+      Manifest_11-26-2017_19.55.29_Hrs.txt
+   hx.txt\
+      72.1.txt
+   stuff\
+      hello.txt\
+      	8562.11.txt
+      goodbye.txt\
+	4764.9.txt
+
+Update hx.txt and goodbye.txt so that a conflict occurs.
+
+================================CHECK OUT #2 COMMAND===========================================================
+
+3. command: java ase.vcs.VCSMain checkout <srcPath>\mypt2repo <destPath>\mypt2r_co2
+
+Project Tree after checkout #2 command:
+
+mypt2r_co2\
+   Activity\
+      Manifest_11-26-2017_19.55.29_Hrs.txt
+    hx.txt
+    stuff\
+      hello.txt
+      goodbye.txt
+	
+
+Project repo tree after checkout #2 command:
+
+myptrepo\
+   Activity\
+      Manifest_11-26-2017_19.53.38_Hrs.txt
+      Manifest_11-26-2017_19.55.29_Hrs.txt
+      Manifest_11-26-2017_19.57.42_Hrs.txt
+   hx.txt\
+      72.1.txt
+   stuff\
+      hello.txt\
+      	8562.11.txt
+      goodbye.txt\
+	4764.9.txt
+
+No updates in mypt2r_co2\ for raising conflict.
+
+================================CHECK IN #1 COMMAND[Content in hx.txt and goodbye.txt is updated before this  check-in]=============================
+4. command: java ase.vcs.VCSMain checkin <srcPath>\mypt2r_co1 <destPath>\mypt2repo
+
+Project repo tree after checkin #1 command:
+
+myptrepo\
+   Activity\
+      Manifest_11-26-2017_19.53.38_Hrs.txt
+      Manifest_11-26-2017_19.55.29_Hrs.txt
+      Manifest_11-26-2017_19.57.42_Hrs.txt
+      Manifest_11-26-2017_19.59.34_Hrs.txt
+   hx.txt\
+      72.1.txt
+      2062.4.txt
+   stuff\
+      hello.txt\
+      	8562.11.txt
+      goodbye.txt\
+	4764.9.txt
+	5643.13.txt
+
+
+================================CHECK IN #2 COMMAND[No file is updataed here]================================================================
+5. command: java ase.vcs.VCSMain checkin <srcPath>\mypt2r_co2 <destPath>\mypt2repo
+
+Project repo tree after checkin #2 command:
+
+myptrepo\
+   Activity\
+      Manifest_11-26-2017_19.53.38_Hrs.txt
+      Manifest_11-26-2017_19.55.29_Hrs.txt
+      Manifest_11-26-2017_19.57.42_Hrs.txt
+      Manifest_11-26-2017_19.59.34_Hrs.txt
+      Manifest_11-26-2017_20.01.15_Hrs.txt
+   hx.txt\
+      72.1.txt
+      2062.4.txt
+   stuff\
+      hello.txt\
+      	8562.11.txt
+      goodbye.txt\
+        4764.9.txt
+        5643.13.txt
+
+================================MERGE COMMAND================================================================
+6. command: java ase.vcs.VCSMain merge <srcPath>\mypt2r_co1 <destPath>\mypt2r_co2 
+
+Destination tree structure after merge command -As there is conflict in two files-hx.txt and goodbye.txt, the destination tree structure will be as below:
+
+mypt2r_co2\
+      hx_MG.txt
+      hx_MR.txt
+      hx_MT.txt
+     stuff\
+      hello.txt
+      goodbye_MG.txt
+      goodbye_MR.txt
+      goodbye_MT.txt
+
+Output will be as:
+src>java ase.vcs.VCSMain merge <src>\mypt2r_co1 <dest>\mypt2r_co2
+
+
+List of full paths where the conflicted files are merged:
+   
+<destpath>\mypt2r_co2\hx.txt
+   
+<destpath>\mypt2r_co2\stuff\goodbye.txt
+
+
+src>
